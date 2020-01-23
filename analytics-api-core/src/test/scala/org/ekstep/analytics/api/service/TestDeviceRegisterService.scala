@@ -77,7 +77,7 @@ class TestDeviceRegisterService extends BaseSpec {
     val deviceLocation = DeviceLocation("Asia", "IN", "India", "KA", "Karnataka", "", "Bangalore", "KARNATAKA", "29", "BANGALORE")
     val deviceId = "test-device-1"
     val deviceSpec = JSONUtils.deserialize[Map[String, AnyRef]]("{\"cpu\":\"abi:  armeabi-v7a  ARMv7 Processor rev 4 (v7l)\",\"make\":\"Micromax Micromax A065\",\"os\":\"Android 4.4.2\"}")
-    val producerId = Some("prod.sunbird.app")
+    val producerId = Some("prod.diksha.app")
     val fcmToken = Some("test-token")
 
     when(configMock.getInt("metrics.time.interval.min")).thenReturn(300)
@@ -180,7 +180,7 @@ class TestDeviceRegisterService extends BaseSpec {
       state = "TamilNadu", subDivsion2 = null, city = "chennai",
       stateCustom = "chennai", stateCodeCustom = "29", districtCustom = null)))
 
-    deviceRegisterActorRef.tell(RegisterDevice(did = "device-001", headerIP = "115.99.217.196", ip_addr = Option("115.99.217.196"), fcmToken = Option("some-token"), producer = Option("prod.sunbird.app"), dspec = Option(deviceSpec), uaspec = Option(uaspec), first_access = Option(123456789), user_declared_state = Option("TamilNadu"), user_declared_district = Option("chennai")), ActorRef.noSender)
+    deviceRegisterActorRef.tell(RegisterDevice(did = "device-001", headerIP = "115.99.217.196", ip_addr = Option("115.99.217.196"), fcmToken = Option("some-token"), producer = Option("prod.diksha.app"), dspec = Option(deviceSpec), uaspec = Option(uaspec), first_access = Option(123456789), user_declared_state = Option("TamilNadu"), user_declared_district = Option("chennai")), ActorRef.noSender)
     verify(postgresDBMock, times(1)).readLocation(query)
 
     metricsActorProbe.expectMsg(IncrementApiCalls)
@@ -234,7 +234,7 @@ class TestDeviceRegisterService extends BaseSpec {
         stateCustom = "", stateCodeCustom = "29", districtCustom = null))
     )
 
-    deviceRegisterActorRef.tell(RegisterDevice(did = "device-001", headerIP = "115.99.217.196", ip_addr = Option("115.99.217.196"), fcmToken = Option("some-token"), producer = Option("prod.sunbird.app"), dspec = Option(deviceSpec), uaspec = Option(uaspec), first_access = Option(123456789), user_declared_state = None, user_declared_district = None), ActorRef.noSender)
+    deviceRegisterActorRef.tell(RegisterDevice(did = "device-001", headerIP = "115.99.217.196", ip_addr = Option("115.99.217.196"), fcmToken = Option("some-token"), producer = Option("prod.diksha.app"), dspec = Option(deviceSpec), uaspec = Option(uaspec), first_access = Option(123456789), user_declared_state = None, user_declared_district = None), ActorRef.noSender)
     verify(postgresDBMock, times(2)).readLocation(query)
   }
 }
