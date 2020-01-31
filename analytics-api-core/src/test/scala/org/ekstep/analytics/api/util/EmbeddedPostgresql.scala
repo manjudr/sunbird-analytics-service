@@ -13,7 +13,7 @@ object EmbeddedPostgresql {
 
   def start() {
     pg = EmbeddedPostgres.builder().setPort(5432).start()
-    connection = pg.getPostgresDatabase().getConnection()
+    connection = pg.getPostgresDatabase().getConnection("postgres","postgres")
     stmt = connection.createStatement()
   }
   
