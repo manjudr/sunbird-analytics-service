@@ -1,9 +1,8 @@
 package org.ekstep.analytics.api.util
 
-import java.sql.{ResultSet, Statement}
+import java.sql.{Connection, DriverManager, ResultSet, Statement}
 
 import io.zonky.test.db.postgres.embedded.EmbeddedPostgres
-import java.sql.Connection
 
 object EmbeddedPostgresql {
   
@@ -12,8 +11,9 @@ object EmbeddedPostgresql {
   var stmt: Statement = null;
 
   def start() {
-    pg = EmbeddedPostgres.builder().setPort(5432).start()
-    connection = pg.getPostgresDatabase().getConnection("postgres","postgres")
+    //pg = EmbeddedPostgres.builder().setPort(5432).start()
+    connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/", "postgres","postgres")
+    //connection = pg.getPostgresDatabase().getConnection("postgres","postgres")
     stmt = connection.createStatement()
   }
   
