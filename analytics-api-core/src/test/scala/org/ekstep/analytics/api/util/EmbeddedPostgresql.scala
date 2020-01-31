@@ -12,7 +12,7 @@ object EmbeddedPostgresql {
 
   def start() {
     //pg = EmbeddedPostgres.builder().setPort(5432).start()
-    connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/", "postgres","postgres")
+    connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/", "postgres","analytics")
     //connection = pg.getPostgresDatabase().getConnection("postgres","postgres")
     stmt = connection.createStatement()
   }
