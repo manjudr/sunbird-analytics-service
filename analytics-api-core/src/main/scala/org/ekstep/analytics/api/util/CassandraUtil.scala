@@ -58,7 +58,6 @@ object CassandraUtil {
     }
 
     def saveExperimentDefinition(expRequests: Array[ExperimentDefinition]) = {
-        import scala.collection.JavaConversions._
         
         expRequests.map { expRequest =>
             val stats = scala.collection.JavaConversions.mapAsJavaMap(expRequest.stats.getOrElse(Map[String, Long]()));
@@ -118,5 +117,14 @@ object CassandraUtil {
                 false
             // $COVERAGE-ON$    
         }
+    }
+}
+
+class CassandraUtil extends Actor {
+    import CassandraUtil._;
+
+    def receive = {
+        case GetJobRequest(requestId: String, clientId: String) => getJobRequest(requestId, clientId);
+        case SaveJobRequest(jobRequest: Array[JobRequest])      => saveJobRequest(jobRequest);
     }
 }
